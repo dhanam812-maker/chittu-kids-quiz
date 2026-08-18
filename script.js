@@ -437,7 +437,7 @@ startQuizBtn.onclick = function () {
         encodeURIComponent(studentEmail) +
         "&name=" +
         encodeURIComponent(studentName) +
-        "&callback=" +
+        "&prefix=" +
         callbackName;
 
     script.onerror = function() {
