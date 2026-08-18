@@ -329,6 +329,27 @@ document.getElementById("restartBtn").onclick = function() {
    scoreSubmitted = false;
     score = 0;
     questionNumber = 1;
+	// Reset timer for new attempt
+clearInterval(timerInterval);
+
+timerSeconds = 0;
+
+document.getElementById("timer").innerHTML = "00:00";
+
+timerInterval = setInterval(function () {
+
+    timerSeconds++;
+
+    let minutes = Math.floor(timerSeconds / 60);
+    let seconds = timerSeconds % 60;
+
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+
+    document.getElementById("timer").innerHTML =
+        minutes + ":" + seconds;
+
+}, 1000);
 
     answeredQuestions =
         new Array(questions.length).fill(false);
