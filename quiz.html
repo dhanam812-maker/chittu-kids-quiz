@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Chittu Kids Quiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -17,35 +17,74 @@
         <a href="#">Maths</a>
     </nav>
 
-</div>
-    <h1>Chittu Kids Quiz  🧠</h1>
+    <h1>Chittu Kids Quiz 🧠</h1>
 
-   <div class="student-info">
-    <label for="studentName">Student Name:</label>
-    <input type="text" id="studentName" placeholder="Enter your name">
-</div>
-	<h2 id="questionNumber">Question 1 of 4</h2>
-    <div id="progressContainer">
-    <div id="progressBar"></div>
-</div>
+    <!-- STUDENT ACCESS SECTION -->
+    <div id="accessSection" class="student-info">
 
-	<p id="question">Which animal is this?</p>
+        <label for="studentName">Student Name:</label>
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Enter your name"
+        >
 
-    <img id="animalImage" src="images/elephant.png" alt="Animal">
+        <br><br>
 
-    <br><br>
+        <label for="studentEmail">Email ID:</label>
+        <input
+            type="email"
+            id="studentEmail"
+            placeholder="Enter your email"
+        >
 
-    <button id="elephantBtn">Elephant</button>
-    <button id="lionBtn">Lion</button>
-    <button id="tigerBtn">Tiger</button>
-	<button id="fourthBtn">Option 4</button>
+        <br><br>
 
-    <p id="result"></p>
-	<p id="score">Score: 0</p>
-	<button id="prevBtn">← Previous Question</button>
-<button id="nextBtn">Next Question →</button>
-<button id="restartBtn">Try Again</button>
-	<script src="script.js"></script>
+        <button id="startQuizBtn">Start Quiz</button>
+
+        <p id="accessMessage"></p>
+
+    </div>
+
+
+    <!-- QUIZ SECTION -->
+    <div id="quizSection" style="display:none;">
+
+        <h2 id="questionNumber">Question 1 of 5</h2>
+
+        <div id="progressContainer">
+            <div id="progressBar"></div>
+        </div>
+
+        <p id="question">Which animal is this?</p>
+
+        <img
+            id="animalImage"
+            src="images/elephant.png"
+            alt="Animal"
+        >
+
+        <br><br>
+
+        <button id="elephantBtn">Elephant</button>
+        <button id="lionBtn">Lion</button>
+        <button id="tigerBtn">Tiger</button>
+        <button id="fourthBtn">Option 4</button>
+
+        <p id="result"></p>
+
+        <p id="score">Score: 0</p>
+
+        <button id="prevBtn">← Previous Question</button>
+
+        <button id="nextBtn">Next Question →</button>
+
+        <button id="restartBtn">Try Again</button>
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
 
