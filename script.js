@@ -12,6 +12,7 @@ function submitScoreToSheet() {
     }
 
     let studentName = document.getElementById("studentName").value.trim();
+	let studentEmail = document.getElementById("studentEmail").value.trim();
 
     if (studentName === "") {
         studentName = "Unknown";
@@ -19,6 +20,13 @@ function submitScoreToSheet() {
 
     let total = questions.length;
     let percentage = Math.round((score / total) * 100);
+	let minutes = Math.floor(timerSeconds / 60);
+let seconds = timerSeconds % 60;
+
+minutes = String(minutes).padStart(2, "0");
+seconds = String(seconds).padStart(2, "0");
+
+let duration = minutes + ":" + seconds;
 
     let data = {
         studentName: studentName,
