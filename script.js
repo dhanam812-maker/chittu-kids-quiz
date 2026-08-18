@@ -400,6 +400,8 @@ startQuizBtn.onclick = function () {
 
     window[callbackName] = function(data) {
 
+        console.log("Access response:", data);
+
         if (data.allowed === true) {
 
             accessMessage.innerHTML =
@@ -419,14 +421,15 @@ startQuizBtn.onclick = function () {
 
             showQuestion();
 
+            delete window[callbackName];
+
         } else {
 
             accessMessage.innerHTML =
                 "❌ " + data.message;
-        }
 
-        delete window[callbackName];
-        script.remove();
+            delete window[callbackName];
+        }
     };
 
     const script = document.createElement("script");
@@ -439,15 +442,6 @@ startQuizBtn.onclick = function () {
         encodeURIComponent(studentName) +
         "&prefix=" +
         callbackName;
-
-    script.onerror = function() {
-
-        accessMessage.innerHTML =
-            "❌ Unable to connect. Please try again.";
-
-        delete window[callbackName];
-        script.remove();
-    };
 
     document.body.appendChild(script);
 };
