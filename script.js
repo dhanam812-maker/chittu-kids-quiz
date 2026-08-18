@@ -451,3 +451,37 @@ startQuizBtn.onclick = function () {
 
     document.body.appendChild(script);
 };
+const startQuizBtn = document.getElementById("startQuizBtn");
+
+startQuizBtn.onclick = function () {
+
+    const studentName =
+        document.getElementById("studentName").value.trim();
+
+    const studentEmail =
+        document.getElementById("studentEmail").value.trim();
+
+    const accessMessage =
+        document.getElementById("accessMessage");
+
+    if (studentName === "") {
+        accessMessage.innerHTML = "⚠️ Please enter your name.";
+        return;
+    }
+
+    if (studentEmail === "") {
+        accessMessage.innerHTML = "⚠️ Please enter your email ID.";
+        return;
+    }
+
+    accessMessage.innerHTML = "⏳ Checking...";
+
+    const url =
+        GOOGLE_SHEET_URL +
+        "?email=" +
+        encodeURIComponent(studentEmail) +
+        "&name=" +
+        encodeURIComponent(studentName);
+
+    window.location.href = url;
+};
