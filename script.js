@@ -396,7 +396,7 @@ startQuizBtn.onclick = function () {
         "⏳ Checking your access...";
 
     const callbackName =
-        "studentAccessCallback_" + Date.now();
+        "accessCallback_" + Date.now();
 
     window[callbackName] = function(data) {
 
@@ -419,15 +419,14 @@ startQuizBtn.onclick = function () {
 
             showQuestion();
 
-            delete window[callbackName];
-
         } else {
 
             accessMessage.innerHTML =
                 "❌ " + data.message;
-
-            delete window[callbackName];
         }
+
+        delete window[callbackName];
+        script.remove();
     };
 
     const script = document.createElement("script");
@@ -444,44 +443,11 @@ startQuizBtn.onclick = function () {
     script.onerror = function() {
 
         accessMessage.innerHTML =
-            "❌ Unable to check access. Please try again.";
+            "❌ Unable to connect. Please try again.";
 
         delete window[callbackName];
+        script.remove();
     };
 
     document.body.appendChild(script);
-};
-const startQuizBtn = document.getElementById("startQuizBtn");
-
-startQuizBtn.onclick = function () {
-
-    const studentName =
-        document.getElementById("studentName").value.trim();
-
-    const studentEmail =
-        document.getElementById("studentEmail").value.trim();
-
-    const accessMessage =
-        document.getElementById("accessMessage");
-
-    if (studentName === "") {
-        accessMessage.innerHTML = "⚠️ Please enter your name.";
-        return;
-    }
-
-    if (studentEmail === "") {
-        accessMessage.innerHTML = "⚠️ Please enter your email ID.";
-        return;
-    }
-
-    accessMessage.innerHTML = "⏳ Checking...";
-
-    const url =
-        GOOGLE_SHEET_URL +
-        "?email=" +
-        encodeURIComponent(studentEmail) +
-        "&name=" +
-        encodeURIComponent(studentName);
-
-    window.location.href = url;
 };
