@@ -1,6 +1,9 @@
 const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbxQNCn0iiwJHWpjHGx7HG_CP2Amp3gEGREHOKc9-vC2Wikg3XvmVeu7GJiiZY-bExLO/exec";
 
 let scoreSubmitted = false;
+let timerSeconds = 0;
+let timerInterval = null;
+let quizStarted = false;
 
 function submitScoreToSheet() {
 
@@ -247,6 +250,8 @@ function showQuestion() {
     progress + "%";
 }
 function showQuizCompleted() {
+	clearInterval(timerInterval);
+quizStarted = false;
 	submitScoreToSheet();
     document.getElementById("score").style.display = "none";
     let result = document.getElementById("result");
@@ -412,6 +417,28 @@ startQuizBtn.onclick = function () {
 
             document.getElementById("quizSection").style.display =
                 "block";
+			// Start timer
+timerSeconds = 0;
+quizStarted = true;
+
+clearInterval(timerInterval);
+
+document.getElementById("timer").innerHTML = "00:00";
+
+timerInterval = setInterval(function () {
+
+    timerSeconds++;
+
+    let minutes = Math.floor(timerSeconds / 60);
+    let seconds = timerSeconds % 60;
+
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+
+    document.getElementById("timer").innerHTML =
+        minutes + ":" + seconds;
+
+}, 1000);
 
             questionNumber = 1;
             score = 0;
