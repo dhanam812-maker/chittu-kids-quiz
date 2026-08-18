@@ -326,67 +326,60 @@ document.getElementById("result").innerHTML =
     "inline-block";
 }
 document.getElementById("restartBtn").onclick = function() {
-   scoreSubmitted = false;
+
+    // Reset quiz
+    scoreSubmitted = false;
     score = 0;
     questionNumber = 1;
-	// Reset timer for new attempt
-clearInterval(timerInterval);
-
-timerSeconds = 0;
-
-document.getElementById("timer").innerHTML = "00:00";
-
-timerInterval = setInterval(function () {
-
-    timerSeconds++;
-
-    let minutes = Math.floor(timerSeconds / 60);
-    let seconds = timerSeconds % 60;
-
-    minutes = String(minutes).padStart(2, "0");
-    seconds = String(seconds).padStart(2, "0");
-
-    document.getElementById("timer").innerHTML =
-        minutes + ":" + seconds;
-
-}, 1000);
 
     answeredQuestions =
         new Array(questions.length).fill(false);
 
-    document.getElementById("animalImage").style.display =
-        "block";
+    // Stop old timer
+    clearInterval(timerInterval);
 
-    document.getElementById("elephantBtn").style.display =
-        "inline-block";
+    // Reset timer
+    timerSeconds = 0;
 
-    document.getElementById("lionBtn").style.display =
-        "inline-block";
+    document.getElementById("timer").innerHTML = "00:00";
 
-    document.getElementById("tigerBtn").style.display =
-        "inline-block";
+    // Start NEW timer
+    timerInterval = setInterval(function () {
 
-    document.getElementById("fourthBtn").style.display =
-        "inline-block";
+        timerSeconds++;
 
-    document.getElementById("nextBtn").style.display =
-        "inline-block";
+        let minutes = Math.floor(timerSeconds / 60);
+        let seconds = timerSeconds % 60;
 
-    document.getElementById("prevBtn").style.display =
-        "inline-block";
+        minutes = String(minutes).padStart(2, "0");
+        seconds = String(seconds).padStart(2, "0");
 
-    document.getElementById("restartBtn").style.display =
-        "none";
-    document.getElementById("question").style.display = "flex";
-document.getElementById("animalImage").style.display = "block";
+        document.getElementById("timer").innerHTML =
+            minutes + ":" + seconds;
 
-document.getElementById("elephantBtn").style.display = "inline-block";
-document.getElementById("lionBtn").style.display = "inline-block";
-document.getElementById("tigerBtn").style.display = "inline-block";
-document.getElementById("fourthBtn").style.display = "inline-block";
+    }, 1000);
 
-document.getElementById("progressContainer").style.display = "block";
-document.getElementById("score").style.display = "block";
+
+    // Show quiz again
+    document.getElementById("question").style.display = "block";
+    document.getElementById("animalImage").style.display = "block";
+
+    document.getElementById("elephantBtn").style.display = "inline-block";
+    document.getElementById("lionBtn").style.display = "inline-block";
+    document.getElementById("tigerBtn").style.display = "inline-block";
+    document.getElementById("fourthBtn").style.display = "inline-block";
+
+    document.getElementById("nextBtn").style.display = "inline-block";
+    document.getElementById("prevBtn").style.display = "inline-block";
+
+    document.getElementById("restartBtn").style.display = "none";
+
+    document.getElementById("progressContainer").style.display = "block";
+    document.getElementById("score").style.display = "block";
+
+    document.getElementById("questionNumber").style.display = "block";
+
+    // Show first question
     showQuestion();
 };
 // ================================
