@@ -4,36 +4,51 @@ let scoreSubmitted = false;
 let timerSeconds = 0;
 let timerInterval = null;
 let quizStarted = false;
-
 function submitScoreToSheet() {
 
     if (scoreSubmitted) {
         return;
     }
 
-    let studentName = document.getElementById("studentName").value.trim();
-	let studentEmail = document.getElementById("studentEmail").value.trim();
+    let studentName =
+        document.getElementById("studentName").value.trim();
+
+    let studentEmail =
+        document.getElementById("studentEmail").value.trim();
 
     if (studentName === "") {
         studentName = "Unknown";
     }
 
     let total = questions.length;
-    let percentage = Math.round((score / total) * 100);
-	let minutes = Math.floor(timerSeconds / 60);
-let seconds = timerSeconds % 60;
 
-minutes = String(minutes).padStart(2, "0");
-seconds = String(seconds).padStart(2, "0");
+    let percentage =
+        Math.round((score / total) * 100);
 
-let duration = minutes + ":" + seconds;
+    // Get final quiz duration
+    let minutes =
+        Math.floor(timerSeconds / 60);
+
+    let seconds =
+        timerSeconds % 60;
+
+    minutes =
+        String(minutes).padStart(2, "0");
+
+    seconds =
+        String(seconds).padStart(2, "0");
+
+    let duration =
+        minutes + ":" + seconds;
 
     let data = {
         studentName: studentName,
+        studentEmail: studentEmail,
         quiz: "Animals Quiz",
         score: score,
         total: total,
-        percentage: percentage
+        percentage: percentage,
+        duration: duration
     };
 
     fetch(GOOGLE_SHEET_URL, {
@@ -47,6 +62,7 @@ let duration = minutes + ":" + seconds;
 
     scoreSubmitted = true;
 }
+
 function correctSound() {
     let audio = new AudioContext();
     let oscillator = audio.createOscillator();
