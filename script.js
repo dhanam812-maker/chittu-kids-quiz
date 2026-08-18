@@ -395,51 +395,59 @@ startQuizBtn.onclick = function () {
     accessMessage.innerHTML =
         "⏳ Checking your access...";
 
-    const url =
+    const callbackName =
+        "studentAccessCallback_" + Date.now();
+
+    window[callbackName] = function(data) {
+
+        if (data.allowed === true) {
+
+            accessMessage.innerHTML =
+                "✅ Welcome " + data.studentName + "!";
+
+            document.getElementById("accessSection").style.display =
+                "none";
+
+            document.getElementById("quizSection").style.display =
+                "block";
+
+            questionNumber = 1;
+            score = 0;
+
+            answeredQuestions =
+                new Array(questions.length).fill(false);
+
+            showQuestion();
+
+            delete window[callbackName];
+
+        } else {
+
+            accessMessage.innerHTML =
+                "❌ " + data.message;
+
+            delete window[callbackName];
+        }
+    };
+
+    const script = document.createElement("script");
+
+    script.src =
         GOOGLE_SHEET_URL +
         "?email=" +
         encodeURIComponent(studentEmail) +
         "&name=" +
-        encodeURIComponent(studentName);
+        encodeURIComponent(studentName) +
+        "&callback=" +
+        callbackName;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
+    script.onerror = function() {
 
-            if (data.allowed === true) {
+        accessMessage.innerHTML =
+            "❌ Unable to check access. Please try again.";
 
-                accessMessage.innerHTML =
-                    "✅ Welcome " + data.studentName + "!";
+        delete window[callbackName];
+    };
 
-                document.getElementById("accessSection").style.display =
-                    "none";
-
-                document.getElementById("quizSection").style.display =
-                    "block";
-
-                // Start the quiz
-                questionNumber = 1;
-                score = 0;
-
-                answeredQuestions =
-                    new Array(questions.length).fill(false);
-
-                showQuestion();
-
-            } else {
-
-                accessMessage.innerHTML =
-                    "❌ " + data.message;
-
-            }
-
-        })
-        .catch(error => {
-
-            console.error(error);
-
-            accessMessage.innerHTML =
-                "❌ Unable to check access. Please try again.";
-
-        });
+    document.body.appendChild(script);
 };
