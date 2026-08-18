@@ -181,7 +181,7 @@ document.getElementById("tigerBtn").onclick = function() {
 document.getElementById("fourthBtn").onclick = function() {
     checkAnswer(4);
 };
-showQuestion();
+
 // Next Question
 document.getElementById("nextBtn").onclick = function() {
 
@@ -362,4 +362,84 @@ document.getElementById("fourthBtn").style.display = "inline-block";
 document.getElementById("progressContainer").style.display = "block";
 document.getElementById("score").style.display = "block";
     showQuestion();
+};
+// ================================
+// PAID STUDENT ACCESS CHECK
+// ================================
+
+const startQuizBtn = document.getElementById("startQuizBtn");
+
+startQuizBtn.onclick = function () {
+
+    const studentName =
+        document.getElementById("studentName").value.trim();
+
+    const studentEmail =
+        document.getElementById("studentEmail").value.trim();
+
+    const accessMessage =
+        document.getElementById("accessMessage");
+
+    if (studentName === "") {
+        accessMessage.innerHTML =
+            "⚠️ Please enter your name.";
+        return;
+    }
+
+    if (studentEmail === "") {
+        accessMessage.innerHTML =
+            "⚠️ Please enter your email ID.";
+        return;
+    }
+
+    accessMessage.innerHTML =
+        "⏳ Checking your access...";
+
+    const url =
+        GOOGLE_SHEET_URL +
+        "?email=" +
+        encodeURIComponent(studentEmail) +
+        "&name=" +
+        encodeURIComponent(studentName);
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.allowed === true) {
+
+                accessMessage.innerHTML =
+                    "✅ Welcome " + data.studentName + "!";
+
+                document.getElementById("accessSection").style.display =
+                    "none";
+
+                document.getElementById("quizSection").style.display =
+                    "block";
+
+                // Start the quiz
+                questionNumber = 1;
+                score = 0;
+
+                answeredQuestions =
+                    new Array(questions.length).fill(false);
+
+                showQuestion();
+
+            } else {
+
+                accessMessage.innerHTML =
+                    "❌ " + data.message;
+
+            }
+
+        })
+        .catch(error => {
+
+            console.error(error);
+
+            accessMessage.innerHTML =
+                "❌ Unable to check access. Please try again.";
+
+        });
 };
