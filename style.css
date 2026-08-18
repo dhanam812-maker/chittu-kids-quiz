@@ -1,0 +1,276 @@
+@charset "utf-8";
+body {
+    text-align: center;
+    background-color: lightblue;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 45px;
+}
+
+p {
+    font-size: 25px;
+}
+
+#animalImage {
+    display: block;
+    width: 300px;
+    height: 250px;
+    object-fit: contain;
+    margin: 20px auto;
+}
+body > img {
+    display: block;
+    width: 250px;
+    height: auto;
+    margin: 20px auto;
+}
+nav {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0 15px;
+}
+#restartBtn {
+    display: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#restartBtn:hover {
+    transform: scale(1.05);
+}
+/* Quiz Completed Screen */
+
+#questionNumber {
+    text-align: center;
+}
+
+#result {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 20px auto;
+}
+
+#restartBtn {
+    display: none;
+    padding: 12px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 15px auto;
+}
+
+#restartBtn:hover {
+    transform: scale(1.05);
+}
+/* Chittu Kids Quiz Design */
+
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+#questionNumber {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+#score {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0 20px;
+}
+
+#animalImage {
+    display: block;
+    width: 300px;
+    height: 250px;
+    object-fit: contain;
+    margin: 20px auto;
+}
+
+#elephantBtn,
+#lionBtn,
+#tigerBtn,
+#fourthBtn {
+    width: 200px;
+    min-height: 65px;
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid #333;
+    border-radius: 15px;
+    background-color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#elephantBtn:hover,
+#lionBtn:hover,
+#tigerBtn:hover,
+#fourthBtn:hover {
+    transform: scale(1.05);
+}
+
+#prevBtn,
+#nextBtn,
+#restartBtn {
+    padding: 12px 22px;
+    margin: 15px 8px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#prevBtn:hover,
+#nextBtn:hover,
+#restartBtn:hover {
+    transform: scale(1.05);
+}
+
+#result {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 20px auto;
+}
+#progressContainer {
+    width: 80%;
+    max-width: 600px;
+    height: 20px;
+    margin: 15px auto 25px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #333;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+/* Correct answer animation */
+
+.correct-animation {
+    animation: popCorrect 0.7s ease-in-out;
+}
+
+@keyframes popCorrect {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.4);
+    }
+
+    60% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* Wrong answer animation */
+
+.wrong-animation {
+    animation: shakeWrong 0.5s ease;
+}
+
+@keyframes shakeWrong {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+#question {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 700px;
+    line-height: 1.4;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Quiz completed animation */
+
+#result {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.completed-animation {
+    animation: completedPop 0.8s ease-in-out;
+}
+
+@keyframes completedPop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    75% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
