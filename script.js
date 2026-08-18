@@ -40,6 +40,8 @@ function submitScoreToSheet() {
 
     let duration =
         minutes + ":" + seconds;
+	console.log("EMAIL:", studentEmail);
+console.log("DURATION:", duration);
 
     let data = {
         studentName: studentName,
