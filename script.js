@@ -1,3 +1,41 @@
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbxQNCn0iiwJHWpjHGx7HG_CP2Amp3gEGREHOKc9-vC2Wikg3XvmVeu7GJiiZY-bExLO/exec";
+
+let scoreSubmitted = false;
+
+function submitScoreToSheet() {
+
+    if (scoreSubmitted) {
+        return;
+    }
+
+    let studentName = document.getElementById("studentName").value.trim();
+
+    if (studentName === "") {
+        studentName = "Unknown";
+    }
+
+    let total = questions.length;
+    let percentage = Math.round((score / total) * 100);
+
+    let data = {
+        studentName: studentName,
+        quiz: "Animals Quiz",
+        score: score,
+        total: total,
+        percentage: percentage
+    };
+
+    fetch(GOOGLE_SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(data)
+    });
+
+    scoreSubmitted = true;
+}
 function correctSound() {
     let audio = new AudioContext();
     let oscillator = audio.createOscillator();
@@ -209,6 +247,7 @@ function showQuestion() {
     progress + "%";
 }
 function showQuizCompleted() {
+	submitScoreToSheet();
     document.getElementById("score").style.display = "none";
     let result = document.getElementById("result");
 
@@ -282,7 +321,7 @@ document.getElementById("result").innerHTML =
     "inline-block";
 }
 document.getElementById("restartBtn").onclick = function() {
-
+   scoreSubmitted = false;
     score = 0;
     questionNumber = 1;
 
