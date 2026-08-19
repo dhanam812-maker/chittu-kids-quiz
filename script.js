@@ -23,7 +23,7 @@ function submitScoreToSheet() {
     let total = questions.length;
 
     let percentage =
-        Math.round((score / total) * 100);
+        Math.round((score / total) * 100) + "%";
 
     // Get final quiz duration
     let minutes =
